@@ -9,6 +9,8 @@ export interface IUser {
   isSeller: boolean;
   phone?: string;
   desc?: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 const userSchema = new Schema<IUser>(
