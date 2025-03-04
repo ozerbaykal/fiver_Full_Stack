@@ -3,7 +3,8 @@ import { Schema, model } from "mongoose";
 export interface IUser {
   username: string;
   email: string;
-  fotograf: string;
+  password: string;
+  photo: string;
   country: string;
   isSeller: boolean;
   phone?: string;
@@ -22,7 +23,12 @@ const userSchema = new Schema<IUser>(
       unique: true,
       required: [true, "Lütfen mail alanını belirleyin"],
     },
-    fotograf: {
+    password: {
+      type: String,
+      unique: true,
+      required: [true, "Lütfen password alanını belirleyin"],
+    },
+    photo: {
       type: String,
       default: "https://picsum.photos/200",
     },
