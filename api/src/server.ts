@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import authRouter from "./routes/auth.routes.ts";
 import gigRouter from "./routes/review.routes.ts";
 import reviewsRouter from "./routes/gig.routes.ts";
+import errorMiddleware from "./middleware/error.ts";
 
 //env dosyasındaki değişkenlere erişmemizi sağlar
 dotenv.config();
@@ -25,9 +26,8 @@ app.use("/api/auth", authRouter);
 app.use("api/gigs", gigRouter);
 app.use("/api/reviews", reviewsRouter);
 
-app.get("/", (req, res) => {
-  res.send("Serverdan merhabalar canım");
-});
+//hata yönetimi içi MW
+app.use(errorMiddleware);
 
 //portu dinlemeye başla
 app.listen(process.env.PORT, () => {

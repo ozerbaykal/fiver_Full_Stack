@@ -11,6 +11,7 @@ export interface IUser {
   desc?: string;
   createdAt: Date;
   updatedAt: Date;
+  _id: string;
 }
 
 const userSchema = new Schema<IUser>(
