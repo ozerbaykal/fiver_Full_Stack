@@ -1,14 +1,51 @@
 import { Schema, model } from "mongoose";
 
 export interface IUser {
-  name: string;
+  username: string;
+  email: string;
+  fotograf: string;
+  country: string;
+  isSeller: boolean;
+  phone?: string;
+  desc?: string;
 }
 
-const userSchema = new Schema<IUser>({
-  name: {
-    type: String,
+const userSchema = new Schema<IUser>(
+  {
+    username: {
+      type: String,
+      unique: true,
+      required: [true, "Lütfen Username alanını belirleyin"],
+    },
+    email: {
+      type: String,
+      unique: true,
+      required: [true, "Lütfen mail alanını belirleyin"],
+    },
+    fotograf: {
+      type: String,
+      default: "https://picsum.photos/200",
+    },
+    country: {
+      type: String,
+      required: [true, "Lütfen Country alanını belirleyin"],
+    },
+
+    isSeller: {
+      type: Boolean,
+      default: false,
+    },
+    phone: {
+      type: String,
+    },
+    desc: {
+      type: String,
+    },
   },
-});
+  {
+    timestamps: true,
+  }
+);
 
 const User = model<IUser>("User", userSchema);
 
