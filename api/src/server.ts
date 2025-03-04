@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import authRouter from "./routes/auth.routes.ts";
 import gigRouter from "./routes/review.routes.ts";
 import reviewsRouter from "./routes/gig.routes.ts";
-import errorMiddleware from "./middleware/error.ts";
+import errorMiddleware from "./middleware/errorHandler.ts";
 
 //env dosyasındaki değişkenlere erişmemizi sağlar
 dotenv.config();

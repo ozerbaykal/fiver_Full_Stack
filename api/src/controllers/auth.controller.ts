@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import User from "../models/user.model.ts";
 import { IUser } from "../models/user.model.ts";
 import jwt from "jsonwebtoken";
+import error from "../utils/error.ts";
 
 // --------------Kaydol--------Yeni Hesap oluştur ---------
 export const register = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -28,8 +29,7 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
   const user: IUser | null = await User.findOne({ username: req.body.username });
   //kullanıcı bulunmazsa hata gönder
   if (!user) {
-    res.status(404).json({ message: "Kullanıcı bulunamadı" });
-    return;
+    return next(error(404, "Girdiğiniz Bilgler Hatalı"));
   }
 
   //veritabanındaki haslenmiş şifre ile isteğin body kısmında gelen normal şifreyi karşılaştır
