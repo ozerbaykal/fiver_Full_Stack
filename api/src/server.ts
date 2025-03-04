@@ -1,9 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import authRouter from "./routes/auth.routes.js";
-import gigsRouter from "./routes/review.routes.js";
-import reviewsRouter from "./routes/gig.routes.js";
+import authRouter from "./routes/auth.routes.ts";
+import gigRouter from "./routes/review.routes.ts";
+import reviewsRouter from "./routes/gig.routes.ts";
 
 //env dosyasındaki değişkenlere erişmemizi sağlar
 dotenv.config();
@@ -22,7 +22,7 @@ app.use(express.json());
 
 //routeları server a tanıt
 app.use("/api/auth", authRouter);
-app.use("api/gigs", gigsRouter);
+app.use("api/gigs", gigRouter);
 app.use("/api/reviews", reviewsRouter);
 
 app.get("/", (req, res) => {
