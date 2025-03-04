@@ -4,9 +4,10 @@ import User from "../models/user.model.ts";
 import { IUser } from "../models/user.model.ts";
 import jwt from "jsonwebtoken";
 import error from "../utils/error.ts";
+import catchAsync from "../utils/catchAsync.ts";
 
 // --------------Kaydol--------Yeni Hesap oluştur ---------
-export const register = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const register = catchAsync(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   //şifreyi salt ve hashle
   const hashedPass: string = bcrypt.hashSync(req.body.password, 12);
 
@@ -20,11 +21,10 @@ export const register = async (req: Request, res: Response, next: NextFunction):
 
   //client'a cavap gönder
   res.status(200).json({ message: "Hesabınız oluşturuldu", data: userWithoutPass });
-};
-
+});
 // --------------Giriş Yap--------Mevcut hesaba giriş ---------
 
-export const login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const login = catchAsync(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   //ismine göre kullanıcıyı db ara
   const user: IUser | null = await User.findOne({ username: req.body.username });
   //kullanıcı bulunmazsa hata gönder
@@ -59,10 +59,10 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
     })
     .status(200)
     .json({ message: "Hesaba giriş yapıldı", token, user: withOutPassword });
-};
+});
 
 // --------------çıkış Yap--------Oturumu kapat ---------
 
-export const logout = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const logout = catchAsync(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   res.clearCookie("token").status(200).json({ message: "Hesaptan Çıkış Yapıldı" });
-};
+});
