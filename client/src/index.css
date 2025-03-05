@@ -11,4 +11,8 @@
         @apply bg-gray-50 border border-gray-300 text-sm block rounded-lg w-full p-2.5 focus:ring-blue-500 focus:border-blue-500
     }
 
+    .title {
+        @apply text-xl md:text-2xl lg:text-3xl text-gray-500 font-bold mb-5
+    }
+
 }
