@@ -4,10 +4,10 @@ import User from "../user";
 import Links from "../Links";
 
 const Header = () => {
-  const user = true;
+  const user = false;
   return (
     <header className=" p-5 shadow">
-      <div className="max-w-[1440px] mx-auto flex justify-between gap-4 md:gap-8">
+      <div className="max flex justify-between gap-4 md:gap-8 ">
         <Link to={"/"}>
           <img src="/fiverr.png" alt="fiver logo" className="w-[100px] " />
         </Link>
@@ -19,7 +19,7 @@ const Header = () => {
           </button>
         </form>
 
-        <div className="flex items-center relative  group">{user ? <User /> : <Links />}</div>
+        <div className="flex items-center relative gap-2  group">{user ? <User /> : <Links />}</div>
       </div>
     </header>
   );
