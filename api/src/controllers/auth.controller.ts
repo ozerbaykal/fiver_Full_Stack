@@ -17,10 +17,10 @@ export const register = catchAsync(async (req: Request, res: Response, next: Nex
     password: hashedPass,
   });
   //passwordu client a gönderme
-  const { password, ...userWithoutPass } = newUser;
+  newUser.password = "";
 
   //client'a cavap gönder
-  res.status(200).json({ message: "Hesabınız oluşturuldu", data: userWithoutPass });
+  res.status(200).json({ message: "Hesabınız oluşturuldu", data: newUser });
 });
 // --------------Giriş Yap--------Mevcut hesaba giriş ---------
 
@@ -47,7 +47,7 @@ export const login = catchAsync(async (req: Request, res: Response, next: NextFu
   });
 
   //şifre alanını kaldır
-  const { password, ...withOutPassword } = user;
+  user.password = "";
 
   //token ' i client a gönder
 
@@ -58,7 +58,7 @@ export const login = catchAsync(async (req: Request, res: Response, next: NextFu
       expires: new Date(Date.now() + 14 * 24 * 3600 * 3600),
     })
     .status(200)
-    .json({ message: "Hesaba giriş yapıldı", token, user: withOutPassword });
+    .json({ message: "Hesaba giriş yapıldı", token, user: user });
 });
 
 // --------------çıkış Yap--------Oturumu kapat ---------
