@@ -1,13 +1,30 @@
-import { useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import Input from "../../components/input";
 import Toggle from "../../components/input/toogle";
 import { Link } from "react-router-dom";
+import { IFormUser } from "../../types";
+import { AuthContext } from "../../context/authContext";
 
 const Register: React.FC = () => {
+  const { register } = useContext(AuthContext);
   const [isSeller, setIsSeller] = useState(false);
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    //bir formdata örneği oluştur
+    const formData = new FormData(e.target as HTMLFormElement);
+    //bütün imputlardaki verileri nesne haline getir
+    const newUser = Object.fromEntries(formData.entries());
+
+    //satıcı hesabı bilgisini nesne içerisine kaydet
+    (newUser as unknown as IFormUser).isSeller = isSeller;
+
+    //api 'a kaydolma isteği at
+    register(newUser as unknown as IFormUser);
+  };
   return (
     <div className="max-w-[900px] mx-auto">
-      <form className="grid md:grid-cols-2 md:gap-10 md:pt-24 ">
+      <form onSubmit={handleSubmit} className="grid md:grid-cols-2 md:gap-10 md:pt-24 ">
         <div className="">
           <h1 className="title">Yeni Hesap OLuştur</h1>
 

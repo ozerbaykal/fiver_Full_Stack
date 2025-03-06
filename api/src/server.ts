@@ -5,6 +5,7 @@ import authRouter from "./routes/auth.routes.ts";
 import gigRouter from "./routes/review.routes.ts";
 import reviewsRouter from "./routes/gig.routes.ts";
 import errorMiddleware from "./middleware/errorHandler.ts";
+import cors from "cors";
 
 //env dosyasındaki değişkenlere erişmemizi sağlar
 dotenv.config();
@@ -20,6 +21,13 @@ const app = express();
 
 //middleware'ler
 app.use(express.json());
+app.use(
+  cors({
+    origin: "http//localhost:5174",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    credentials: true,
+  })
+);
 
 //routeları server a tanıt
 app.use("/api/auth", authRouter);

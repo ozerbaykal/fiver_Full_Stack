@@ -10,6 +10,7 @@ export interface IInfo {
   text: string;
 }
 
+//formdan gelen
 export interface IFormUser {
   username: string;
   email: string;
@@ -21,6 +22,7 @@ export interface IFormUser {
   desc?: string;
 }
 
+//api den gelen
 export interface IUser {
   _id: string;
   username: string;
