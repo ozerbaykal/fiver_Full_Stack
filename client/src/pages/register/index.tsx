@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Input from "../../components/input";
 import Toggle from "../../components/input/toogle";
+import { Link } from "react-router-dom";
 
 const Register: React.FC = () => {
   const [isSeller, setIsSeller] = useState(false);
@@ -20,6 +21,20 @@ const Register: React.FC = () => {
         <div>
           <h1 className="title">Satıcı Olmak İstiyorum</h1>
           <Toggle setIsSeller={setIsSeller} />
+          <Input label="Telefon" type="number" name="phone" disabled={!isSeller} required={isSeller} />
+          <Input label="Açıklama" type="textarea" name="phone" disabled={!isSeller} required={isSeller} />
+          <button type="submit" className="btn">
+            Kayıt Ol
+          </button>
+          <p className="mt-5 text-gray-500">
+            Hesabınız Var mı?
+            <Link
+              className="ms-3 text-blue-600  hover:text-blue-800 hover:scale-110 transition "
+              to={"/login"}
+            >
+              Giriş Yap
+            </Link>
+          </p>
         </div>
       </form>
     </div>

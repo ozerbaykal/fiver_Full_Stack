@@ -22,7 +22,7 @@ const Input = ({
           name={name}
           disabled={disabled}
           id={name}
-          className="input-field min-h-[100px]max-h-[200px]"
+          className="input-field min-h-[100px] max-h-[200px]"
         ></textarea>
       ) : (
         <input
