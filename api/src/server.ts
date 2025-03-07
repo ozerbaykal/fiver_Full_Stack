@@ -6,6 +6,7 @@ import gigRouter from "./routes/review.routes.ts";
 import reviewsRouter from "./routes/gig.routes.ts";
 import errorMiddleware from "./middleware/errorHandler.ts";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 //env dosyasındaki değişkenlere erişmemizi sağlar
 dotenv.config();
@@ -18,6 +19,8 @@ mongoose
 
 //express uygulamasını başlat
 const app = express();
+
+app.use(cookieParser());
 
 //middleware'ler
 app.use(express.json());

@@ -20,7 +20,7 @@ const Header = () => {
           </button>
         </form>
 
-        <div className="flex items-center relative gap-2  group">
+        <div className="flex items-center relative gap-2  group cursor-pointer">
           {user ? <User user={user} /> : <Links />}
         </div>
       </div>

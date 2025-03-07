@@ -66,3 +66,8 @@ export const login = catchAsync(async (req: Request, res: Response, next: NextFu
 export const logout = catchAsync(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   res.clearCookie("token").status(200).json({ message: "Hesaptan Çıkış Yapıldı" });
 });
+
+// --------------Profil bilgilerini al ---------------
+export const profile = catchAsync(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  res.status(200).json({ message: "Profil bilgileri alındı" });
+});
