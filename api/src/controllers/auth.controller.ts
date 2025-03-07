@@ -53,8 +53,8 @@ export const login = catchAsync(async (req: Request, res: Response, next: NextFu
 
   res
     .cookie("token", token, {
-      httpOnly: true,
-      sameSite: "none",
+      httpOnly: false,
+      sameSite: "lax",
       expires: new Date(Date.now() + 14 * 24 * 3600 * 3600),
     })
     .status(200)

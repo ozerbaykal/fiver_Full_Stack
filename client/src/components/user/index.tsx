@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { IUser } from "../../types";
+import { useAuth } from "../../context/authContext";
 
 type Props = {
   user: IUser;
 };
 
 const User = ({ user }: Props) => {
+  const { logout } = useAuth();
   return (
     <>
       <img src={user.photo} alt="" className="size-[40px] rounded-full object-cover bg-blue-400" />
@@ -24,12 +26,7 @@ const User = ({ user }: Props) => {
         <Link to={"/"} className="px-5 py-2  hover:bg-gray-100 text-nowrap">
           Messajlar
         </Link>
-        <button
-          className="px-5 py-2  hover:bg-gray-100 text-nowrap"
-          onClick={() => {
-            alert("çıkış yapılıyor");
-          }}
-        >
+        <button className="px-5 py-2  hover:bg-gray-100 text-nowrap" onClick={() => logout()}>
           Çıkış yap
         </button>
       </div>

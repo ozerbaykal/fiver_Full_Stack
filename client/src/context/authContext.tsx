@@ -24,6 +24,10 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
   //her sayfa yenilendiğinde
   useEffect(() => {
+    //eğer token yoksa çalışmasın
+    const token = localStorage.getItem("token") || document.cookie;
+    if (!token) return;
+
     api
       .get("/auth/profile", {
         headers: {
@@ -31,7 +35,10 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
         },
       })
       .then((res) => setUser(res.data.user))
-      .catch((err) => console.log(err));
+      .catch(() => {
+        localStorage.removeItem("token");
+        toast.info("Oturumunuzun süresi doldu. Tekrar giriş yapın");
+      });
   }, []);
 
   //kaydol
@@ -47,8 +54,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
         navigate("/login");
       })
       .catch((err) => {
-        toast.error("Üzgünüz bir hata oluştu");
-        console.log(err);
+        toast.error(err.response?.data?.message);
       });
   };
 
@@ -63,17 +69,27 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
         //token 'i lokel kaydet
         localStorage.setItem("token", res.data.token);
 
-        toast.info("Giriş yapıldı");
+        toast.success("Giriş yapıldı");
         navigate("/");
       })
       .catch((err) => {
-        toast.error("Üzgünüz bir hata oluştu");
-        console.log(err);
+        toast.error(err.response?.data?.message);
       });
   };
 
   //çıkış yap
-  const logout = () => {};
+  const logout = () => {
+    api
+      .post("/auth/logout")
+      .then(() => {
+        setUser(null);
+        localStorage.removeItem("token");
+        toast.info("Oturumunuz kapatıldı");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return <AuthContext.Provider value={{ user, register, login, logout }}>{children}</AuthContext.Provider>;
 };
