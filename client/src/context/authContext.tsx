@@ -1,4 +1,4 @@
-import { JSX, createContext, useContext, useState } from "react";
+import { JSX, createContext, useContext, useEffect, useState } from "react";
 import { IFormUser, ILoginUser, IUser } from "../types";
 import api from "../api";
 import { toast } from "react-toastify";
@@ -21,6 +21,19 @@ export const AuthContext = createContext<ContextType>({
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   const [user, setUser] = useState<IUser | null>(null);
   const navigate = useNavigate();
+
+  //her sayfa yenilendiğinde
+  useEffect(() => {
+    api
+      .get("/auth/profile", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => setUser(res.data.user))
+      .catch((err) => console.log(err));
+  }, []);
+
   //kaydol
   const register = (user: IFormUser) => {
     api

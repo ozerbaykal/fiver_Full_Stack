@@ -69,5 +69,11 @@ export const logout = catchAsync(async (req: Request, res: Response, next: NextF
 
 // --------------Profil bilgilerini al ---------------
 export const profile = catchAsync(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  res.status(200).json({ message: "Profil bilgileri alındı" });
+  //req nesnesi içerisinde kullanıcı id'sine karşılık gelen kullanıcı verilerini al
+  const user = await User.findById(req.userId);
+  if (!user) return next(error(404, "Kullanıcı bulunamdı"));
+
+  user.password = "";
+
+  res.status(200).json({ message: "Profil bilgileri alındı", user });
 });
