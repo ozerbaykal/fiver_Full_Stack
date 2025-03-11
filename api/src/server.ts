@@ -2,8 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import authRouter from "./routes/auth.routes.ts";
-import gigRouter from "./routes/review.routes.ts";
-import reviewsRouter from "./routes/gig.routes.ts";
+import gigRouter from "./routes/gig.routes.ts";
+import reviewsRouter from "./routes/review.routes.ts";
 import errorMiddleware from "./middleware/errorHandler.ts";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -38,7 +38,6 @@ app.use(
 app.use("/api/auth", authRouter);
 app.use("/api/gigs", gigRouter);
 app.use("/api/reviews", reviewsRouter);
-
 //hata yönetimi içi MW/
 app.use(errorMiddleware);
 

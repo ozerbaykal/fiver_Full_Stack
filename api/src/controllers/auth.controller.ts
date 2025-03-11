@@ -5,8 +5,7 @@ import { IUser } from "../models/user.model.ts";
 import jwt from "jsonwebtoken";
 import error from "../utils/error.ts";
 import catchAsync from "../utils/catchAsync.ts";
-import cloudinary, { upload } from "../utils/cloudinary.ts";
-import path from "path";
+import { upload } from "../utils/cloudinary.ts";
 
 // --------------Kaydol--------Yeni Hesap oluştur ---------
 export const register = catchAsync(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
