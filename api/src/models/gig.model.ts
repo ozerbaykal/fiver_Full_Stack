@@ -1,12 +1,31 @@
-import { Schema, model } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 
+//bir belgenin tipi
 export interface IGig {
-  name: string;
+  _id: string;
+  user: Types.ObjectId;
+  title: string;
+  description: string;
+  reviewCount: string;
+  starCount: number;
+  category: string;
+  coverImage: string;
+  images: string[];
+  package_title: string;
+  package_description: string;
+  package_price: number;
+  package_features: string[];
+  package_duration: number;
+  package_revisions: number;
+  createdAt: string | null;
+  updatedAt: string;
 }
 
+//şema oluştur
 const gigSchema = new Schema<IGig>({
-  name: {
-    type: String,
+  user: {
+    type: Schema.ObjectId,
+    ref: "User",
   },
 });
 

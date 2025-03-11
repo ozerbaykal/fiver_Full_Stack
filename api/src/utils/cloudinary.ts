@@ -21,10 +21,8 @@ export const upload = async (
       folder,
       resource_type: type,
     },
-    (err, result) => {
+    (err) => {
       if (err) return next(error(400, "Fotoğraf yüklenirken sorun oluştu"));
-
-      return result?.secure_url;
     }
   );
 };
