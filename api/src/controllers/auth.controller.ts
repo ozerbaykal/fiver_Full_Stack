@@ -5,11 +5,19 @@ import { IUser } from "../models/user.model.ts";
 import jwt from "jsonwebtoken";
 import error from "../utils/error.ts";
 import catchAsync from "../utils/catchAsync.ts";
+import cloudinary, { upload } from "../utils/cloudinary.ts";
+import path from "path";
 
 // --------------Kaydol--------Yeni Hesap oluştur ---------
 export const register = catchAsync(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   //şifreyi salt ve hashle
   const hashedPass: string = bcrypt.hashSync(req.body.password, 12);
+
+  //fotoğrafı buluta yükle
+  const image = await upload(req.file?.path as string, next);
+
+  //buluta yüklenen fotğrafın url'ini mongodb ye kaydedilecek olan verinini içerisine ekle
+  req.body.photo = image.secure_url;
 
   //kullanıcıyı veri tabanına kaydet
   const newUser = await User.create({
