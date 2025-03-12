@@ -1,26 +1,10 @@
 import { NextFunction, Response, Request } from "express";
 import c from "../utils/catchAsync.ts";
 import Gig from "../models/gig.model.ts";
-import { error } from "console";
 import { upload } from "../utils/cloudinary.ts";
-import { ExtendedFiles } from "../types/index.ts";
+import { ExtendedFiles, Filter, Query } from "../types/index.ts";
+import error from "../utils/error.ts";
 
-type Query = {
-  category?: string;
-  min?: number;
-  max?: number;
-  search?: string;
-  userID?: string;
-};
-type Filter = {
-  user?: string;
-  category?: string;
-  price?: { $gte?: number; $lte?: number };
-  title?: {
-    $regex: string;
-    $options: "i";
-  };
-};
 const buildFiltes = (query: Query) => {
   let filters: Filter = {};
 
@@ -29,9 +13,9 @@ const buildFiltes = (query: Query) => {
   if (query.category) filters.category = query.category;
 
   if (query.min || query.max) {
-    filters.price = {};
-    if (query.min) filters.price.$gte = query.min;
-    if (query.max) filters.price.$lte = query.max;
+    filters.package_price = {};
+    if (query.min) filters.package_price.$gte = query.min;
+    if (query.max) filters.package_price.$lte = query.max;
   }
 
   if (query.search) filters.title = { $regex: query.search, $options: "i" };
@@ -42,9 +26,6 @@ const buildFiltes = (query: Query) => {
 export const getAllGigs = c(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const filters = buildFiltes(req.query);
 
-  console.log("QUERY", req.query);
-  console.log("FİLTERS", filters);
-
   const gigs = await Gig.find(filters).populate("user", "username photo");
 
   if (gigs.length === 0) return next(error(404, "Hiç bir hizmet bulunamadı"));
@@ -52,7 +33,8 @@ export const getAllGigs = c(async (req: Request, res: Response, next: NextFuncti
 });
 
 export const getGig = c(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  res.status(200).json({ message: "işlem başarılı" });
+  const gig = await Gig.findById(req.params.id).populate("user", "-password");
+  res.status(200).json({ message: "Hizmet Verisi alındı, ", gig });
 });
 
 export const createGig = c(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -85,5 +67,16 @@ export const createGig = c(async (req: Request, res: Response, next: NextFunctio
 });
 
 export const deleteGig = c(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  res.status(200).json({ message: "işlem başarılı" });
+  // hizmet detaylarını al
+  const gig = await Gig.findById(req.params.id);
+
+  // işlemi yapan kişi hizmet sahibi değilse hata döndür
+  if (gig?.user !== req.userId) return next(error(404, "Bu işlemi yapmaya yetkiniz yok"));
+
+  //hizmeti sil
+  await Gig.findByIdAndDelete(req.params.id);
+
+  //client e cevap gönder
+
+  res.status(200).json({ message: "Hizmet başarılı bir şekilde kaldırıldı" });
 });

@@ -20,7 +20,7 @@ router
     ]),
     createGig
   );
-router.route("/:id").get(getGig).delete(deleteGig);
+router.route("/:id").get(getGig).delete(protect, deleteGig);
 
 //3 routeları server (app) 'e tanıtmak için export et
 export default router;
