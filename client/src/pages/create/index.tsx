@@ -3,10 +3,17 @@ import Select from "../../components/input/select";
 import { categories, inputs } from "../../utils/constants";
 
 const Create = () => {
+  //form gönderilince
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+
+    // inputlardaki verileri al
+    const data = new FormData(e.currentTarget);
+  };
   return (
     <div>
       <h1 className="font-bold text-3xl mb-5">Hizmet Oluştur</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="grid  grid-cols-1 md:grid-cols-2 gap-x-10">
           {inputs.map((props, key) => (
             <Input key={key} {...props} />
