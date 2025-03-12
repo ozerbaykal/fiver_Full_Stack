@@ -77,6 +77,5 @@ export const deleteGig = c(async (req: Request, res: Response, next: NextFunctio
   await Gig.findByIdAndDelete(req.params.id);
 
   //client e cevap gönder
-
   res.status(200).json({ message: "Hizmet başarılı bir şekilde kaldırıldı" });
 });
