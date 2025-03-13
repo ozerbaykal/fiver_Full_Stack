@@ -10,11 +10,11 @@ const Title = ({ query, category }: Props) => {
         {query ? (
           <p>
             {" "}
-            <span className="font-bold text-3xl">{query}</span> için arama sonuçları
+            <span className="font-bold items-center text-xl">{query}</span> için arama sonuçları
           </p>
         ) : (
-          <p>
-            <span className="font-bold ">{category}</span> categorisi için arama sonuçları
+          <p className="items-center">
+            <span className="font-bold text-xl  ">{category}</span> categorisi için arama sonuçları
           </p>
         )}
       </h1>

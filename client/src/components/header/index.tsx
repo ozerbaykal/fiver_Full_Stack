@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import User from "../user";
 import Links from "../Links";
 import { useAuth } from "../../context/authContext";
+import Form from "./form";
 
 const Header = () => {
   const { user } = useAuth();
@@ -12,13 +13,7 @@ const Header = () => {
         <Link to={"/"}>
           <img src="/fiverr.png" alt="fiver logo" className="w-[100px] " />
         </Link>
-
-        <form className="flex-1 flex border rounded overflow-hidden max-w-[500px]">
-          <input placeholder="ara.." type="text" className="w-full h-full px-3 outline-none" />
-          <button className="bg-black p-2 text-xl text-white max-sm:hidden">
-            <IoSearch />
-          </button>
-        </form>
+        <Form />
 
         <div className="flex items-center relative gap-2  group cursor-pointer">
           {user ? <User user={user} /> : <Links />}

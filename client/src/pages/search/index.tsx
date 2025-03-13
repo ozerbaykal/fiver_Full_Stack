@@ -4,6 +4,9 @@ import api from "../../api";
 import Title from "./title";
 import Loader from "../../components/loader/loader";
 import Error from "../../components/error";
+import Card from "../../components/card";
+import { Key } from "react";
+import { IGig } from "../../types";
 
 const Search = () => {
   // url den parametreleri al
@@ -20,7 +23,7 @@ const Search = () => {
   console.log(params);
 
   //apiden verileri al
-  const { isLoading, error, data, refetch } = useQuery({
+  const { isLoading, error, data, refetch } = useQuery<IGig>({
     queryKey: ["gigs", params],
     queryFn: () =>
       api
@@ -38,7 +41,11 @@ const Search = () => {
       ) : error ? (
         <Error info={error.message} refetch={refetch} />
       ) : (
-        <div>{data}</div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 my-5">
+          {data?.map((item: IGig) => (
+            <Card item={item} key={item._id} />
+          ))}
+        </div>
       )}
     </div>
   );

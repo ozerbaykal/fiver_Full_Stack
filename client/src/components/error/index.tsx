@@ -12,7 +12,7 @@ const Error = ({ info, refetch }: Props) => {
         </p>
         <button
           onClick={refetch}
-          className="bg-slate-100 px-2 py-2 rounded-md mt-10 hover:bg-gray-400 hover:text-white "
+          className="bg-slate-100 px-2 py-2 rounded-md mt-10 hover:bg-gray-400 transition hover:text-white "
         >
           Tekrar Dene
         </button>
