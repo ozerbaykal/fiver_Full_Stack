@@ -46,7 +46,7 @@ export const createGig = c(async (req: Request, res: Response, next: NextFunctio
 
   const coverImage = await upload(files.coverImage[0].path, next, "gig-images");
 
-  //diğer fotoğraflariçin promise oluştur
+  //diğer fotoğraflari için promise oluştur
   const promises = files.images.map((image) => upload(image.path, next, "gig-images"));
 
   //bütün resimleri tek seferde yükleyip sonuçları al
@@ -57,7 +57,7 @@ export const createGig = c(async (req: Request, res: Response, next: NextFunctio
   req.body.images = images.map((image) => image.secure_url);
 
   //paket özelliklerini virgülle ayrılmış listeye çevir
-  req.body.package_features = req.body.package_features.split(",");
+  req.body.package_features = req.body.package_features?.split(",");
 
   //yeni hizmet belgesi oluştur
   const savedGig = await Gig.create({ ...req.body, user: req.userId });

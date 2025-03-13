@@ -8,7 +8,6 @@ type Props = {
 
 const User = ({ user }: Props) => {
   const { logout } = useAuth();
-  console.log(user.isSeller);
   return (
     <>
       <img src={user.photo} alt="" className="size-[40px] rounded-full object-cover bg-blue-400" />
