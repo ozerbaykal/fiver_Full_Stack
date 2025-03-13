@@ -1,6 +1,10 @@
-const Loader = () => {
+type Props = {
+  designs: String;
+};
+
+const Loader = ({ designs }: Props) => {
   return (
-    <div className="text-center">
+    <div className={`text-center ${designs}`}>
       <div role="status">
         <svg
           aria-hidden="true"

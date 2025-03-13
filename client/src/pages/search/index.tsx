@@ -2,6 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 import api from "../../api";
 import Title from "./title";
+import Loader from "../../components/loader/loader";
+import Error from "../../components/error";
 
 const Search = () => {
   // url den parametreleri al
@@ -30,6 +32,14 @@ const Search = () => {
   return (
     <div>
       <Title query={query} category={category} />
+
+      {isLoading ? (
+        <Loader designs="my-20" />
+      ) : error ? (
+        <Error info={error.message} refetch={refetch} />
+      ) : (
+        <div>{data}</div>
+      )}
     </div>
   );
 };
