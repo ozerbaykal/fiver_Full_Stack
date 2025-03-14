@@ -3,19 +3,19 @@ import { IGig } from "../../types";
 import { AiOutlineHome } from "react-icons/ai";
 
 type Props = {
-  gig: IGig | undefined;
+  category: string;
 };
 
-const BreadCrumb = ({ gig }: Props) => {
+const BreadCrumb = ({ category }: Props) => {
   return (
-    <div>
+    <div className="my-5">
       <p className="flex gap-3 items-center text-gray-500">
         <Link to={"/"}>
           <AiOutlineHome />
         </Link>
         <span> /</span>
-        <Link to={`search?category=${gig?.category}`} className="hover:underline">
-          {gig?.category}
+        <Link to={`search?category=${category}`} className="hover:underline">
+          {category}
         </Link>
       </p>
     </div>
