@@ -39,7 +39,7 @@ const Register: React.FC = () => {
           <h1 className="title">Satıcı Olmak İstiyorum</h1>
           <Toggle setIsSeller={setIsSeller} />
           <Input label="Telefon" type="number" name="phone" disabled={!isSeller} required={isSeller} />
-          <Input label="Açıklama" type="textarea" name="phone" disabled={!isSeller} required={isSeller} />
+          <Input label="Açıklama" type="textarea" name="desc" disabled={!isSeller} required={isSeller} />
           <button type="submit" className="btn">
             Kayıt Ol
           </button>

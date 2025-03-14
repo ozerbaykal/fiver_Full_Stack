@@ -22,7 +22,6 @@ export const register = catchAsync(async (req: Request, res: Response, next: Nex
   const newUser = await User.create({
     ...req.body,
     password: hashedPass,
-    isSeller: true,
   });
   //passwordu client a gönderme
   newUser.password = "";

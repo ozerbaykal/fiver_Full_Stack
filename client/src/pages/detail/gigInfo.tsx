@@ -20,7 +20,7 @@ const GigInfo = ({ gig }: Props) => {
         <div>
           <h4 className="font-bold"> {gig.user.username}</h4>
 
-          <Rating rating={4.3} reviews={"56 revies"} />
+          <Rating rating={4.3} reviews={"56 reviews"} />
         </div>
       </div>
       {/* resim galerisi */}

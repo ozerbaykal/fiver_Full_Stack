@@ -14,9 +14,9 @@ const Detail = () => {
 
   const { isLoading, error, data, refetch } = useQuery<IGigDetail>({
     queryKey: ["gig"],
-    queryFn: () => api.get(`/gigss/${id}`).then((res) => res.data.gig),
+    queryFn: () => api.get(`/gigs/${id}`).then((res) => res.data.gig),
   });
-
+  console.log(data);
   return (
     <div>
       {isLoading ? (
@@ -25,13 +25,13 @@ const Detail = () => {
         <Error info={error.message} refetch={refetch} />
       ) : (
         data && (
-          <div className="flex flex-col lg:flex-row gap-10">
+          <div className="flex flex-col lg:flex-row gap-10 ">
             <div>
               <BreadCrumb category={data.category} />
               <GigInfo gig={data} />
-              <UserInfo user={data?.user} />
+              <UserInfo user={data.user} />
             </div>
-            <PackageInfo />
+            <PackageInfo data={data} />
           </div>
         )
       )}

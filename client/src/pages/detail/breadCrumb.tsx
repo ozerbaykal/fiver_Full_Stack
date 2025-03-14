@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { IGig } from "../../types";
 import { AiOutlineHome } from "react-icons/ai";
 
 type Props = {

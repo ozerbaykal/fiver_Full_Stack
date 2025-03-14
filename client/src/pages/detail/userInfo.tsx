@@ -1,5 +1,4 @@
-import { FaStar } from "react-icons/fa";
-import { ISellerUser, IUser } from "../../types";
+import { ISellerUser } from "../../types";
 import Rating from "../../components/rating";
 import { PiStarFourFill } from "react-icons/pi";
 
@@ -12,13 +11,13 @@ const UserInfo = ({ user }: Props) => {
     <div>
       <h1 className="font-bold text-lg mt-10 mb-3">{user.username} 'i Tanıyalım</h1>
 
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center gap-3">
         <img src={user.photo} className="size-28 rounded-full object-cover" />
 
         <h4 className="font-semibold">{user.username}</h4>
-        {/* <p className="text-gray-600 ">{user?.desc}</p> */}
+        <p className="text-gray-600 ">{user?.desc}</p>
 
-        <div className="flex gap-5">
+        <div className="flex  gap-5">
           <Rating rating={4.4} reviews={"67 reviews"} />
 
           <div className="flex items-center">
@@ -30,9 +29,9 @@ const UserInfo = ({ user }: Props) => {
         </div>
       </div>
 
-      <div className="flex gap-8 mt-5">
+      <div className="flex gap-8 mt-7">
         <button className="py-2 px-5 border rounded-md">İletişime Geç</button>
-        <button>Toplatı Ayarla</button>
+        <button className="py-2 px-5 border rounded-md">Toplatı Ayarla</button>
       </div>
 
       <div className="border my-10 p-5 grid md:grid-cols-2 gap-5">
