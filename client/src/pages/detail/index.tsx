@@ -6,15 +6,15 @@ import Error from "../../components/error";
 import GigInfo from "./gigInfo";
 import UserInfo from "./userInfo";
 import PackageInfo from "./packageInfo";
-import { IGig } from "../../types";
+import { IGigDetail } from "../../types";
 import BreadCrumb from "./breadCrumb";
 
 const Detail = () => {
   const { id } = useParams();
 
-  const { isLoading, error, data, refetch } = useQuery<IGig>({
+  const { isLoading, error, data, refetch } = useQuery<IGigDetail>({
     queryKey: ["gig"],
-    queryFn: () => api.get(`/gigs/${id}`).then((res) => res.data.gig),
+    queryFn: () => api.get(`/gigss/${id}`).then((res) => res.data.gig),
   });
 
   return (
@@ -29,7 +29,7 @@ const Detail = () => {
             <div>
               <BreadCrumb category={data.category} />
               <GigInfo gig={data} />
-              <UserInfo />
+              <UserInfo user={data?.user} />
             </div>
             <PackageInfo />
           </div>

@@ -23,7 +23,7 @@ const Search = () => {
   console.log(params);
 
   //apiden verileri al
-  const { isLoading, error, data, refetch } = useQuery<IGig>({
+  const { isLoading, error, data, refetch } = useQuery<IGig[]>({
     queryKey: ["gigs", params],
     queryFn: () =>
       api
