@@ -43,7 +43,7 @@ const Create = () => {
   };
   return (
     <div>
-      <h1 className="font-bold text-3xl mb-5">Hizmet Oluştur</h1>
+      <h1 className="font-bold text-3xl mb-5 text-gray-600">Hizmet Oluştur</h1>
       <form onSubmit={handleSubmit}>
         <div className="grid  grid-cols-1 md:grid-cols-2 gap-x-10">
           {inputs.map((props, key) => (

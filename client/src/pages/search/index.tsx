@@ -41,7 +41,7 @@ const Search = () => {
       ) : error ? (
         <Error info={error.message} refetch={refetch} />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 my-5">
+        <div className="layout">
           {data?.map((item: IGig) => (
             <Card item={item} key={item._id} />
           ))}

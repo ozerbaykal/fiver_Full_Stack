@@ -71,7 +71,7 @@ export const deleteGig = c(async (req: Request, res: Response, next: NextFunctio
   const gig = await Gig.findById(req.params.id);
 
   // işlemi yapan kişi hizmet sahibi değilse hata döndür
-  if (gig?.user !== req.userId) return next(error(404, "Bu işlemi yapmaya yetkiniz yok"));
+  if (String(gig?.user) !== req.userId) return next(error(404, "Bu işlemi yapmaya yetkiniz yok"));
 
   //hizmeti sil
   await Gig.findByIdAndDelete(req.params.id);
