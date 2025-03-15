@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { IGig } from "../../types";
 import api from "../../api";
 
@@ -7,12 +7,17 @@ type Props = {
 };
 
 const Buttons = ({ item }: Props) => {
+  const client = useQueryClient();
+
   const { mutate, isPending } = useMutation({
     mutationFn: () => api.delete(`/gigs/${item._id}`),
+
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ["my-gigs"] });
+    },
   });
   return (
-    <div className="flex justify-between ">
-      <button className="button bg-blue-400">Düzenle</button>
+    <div className="flex justify-end px-2 ">
       <button
         className="button bg-red-400"
         disabled={isPending}

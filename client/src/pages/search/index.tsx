@@ -39,7 +39,7 @@ const Search = () => {
       {isLoading ? (
         <Loader designs="my-20" />
       ) : error ? (
-        <Error info={error.message} refetch={refetch} />
+        <Error info={error} refetch={refetch} />
       ) : (
         <div className="layout">
           {data?.map((item: IGig) => (

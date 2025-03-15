@@ -8,6 +8,7 @@ import Search from "./pages/search";
 import Create from "./pages/create";
 import Detail from "./pages/detail";
 import MyGigs from "./pages/my-gigs";
+import Protected from "./components/protected";
 
 const App = () => {
   return (
@@ -19,8 +20,12 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/my-gigs" element={<MyGigs />} />
-          <Route path="/add-gig" element={<Create />} />
+          {/* sadece satıcı hesapları girebilmeli */}
+          <Route element={<Protected />}>
+            <Route path="/my-gigs" element={<MyGigs />} />
+            <Route path="/add-gig" element={<Create />} />
+          </Route>
+
           <Route path="/detail/:id" element={<Detail />} />
         </Routes>
       </div>

@@ -12,7 +12,7 @@ const MyGigs = () => {
 
   //kullanıcıya ait hizmetleri al
   const { data, isLoading, refetch, error } = useQuery<IGig[]>({
-    queryKey: ["gigs", user],
+    queryKey: ["my-gigs", user],
     queryFn: () => api.get("/gigs", { params: { userID: user?._id } }).then((res) => res.data.gigs),
   });
 
@@ -24,7 +24,7 @@ const MyGigs = () => {
         {isLoading ? (
           <Loader />
         ) : error ? (
-          <Error info={error?.message} refetch={refetch} />
+          <Error info={error} refetch={refetch} />
         ) : (
           data && (
             <div className="layout">

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 type ContextType = {
   user: IUser | null;
+  isLoading: boolean;
   register: (user: IFormUser) => void;
   login: (user: ILoginUser) => void;
   logout: () => void;
@@ -13,6 +14,7 @@ type ContextType = {
 
 export const AuthContext = createContext<ContextType>({
   user: null,
+  isLoading: true,
   register: () => {},
   login: () => {},
   logout: () => {},
@@ -20,13 +22,16 @@ export const AuthContext = createContext<ContextType>({
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   const [user, setUser] = useState<IUser | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
   //her sayfa yenilendiğinde
   useEffect(() => {
     //eğer token yoksa çalışmasın
     const token = localStorage.getItem("token") || document.cookie;
-    if (!token) return;
+    if (!token) return setIsLoading(false);
+
+    setIsLoading(true);
 
     api
       .get("/auth/profile", {
@@ -38,7 +43,8 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
       .catch(() => {
         localStorage.removeItem("token");
         toast.info("Oturumunuzun süresi doldu. Tekrar giriş yapın");
-      });
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
   //kaydol
@@ -60,6 +66,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
   //giriş yap
   const login = (user: ILoginUser) => {
+    setIsLoading(true);
     api
       .post("/auth/login", user)
       .then((res) => {
@@ -74,7 +81,8 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
       })
       .catch((err) => {
         toast.error(err.response?.data?.message);
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   //çıkış yap
@@ -91,7 +99,11 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
       });
   };
 
-  return <AuthContext.Provider value={{ user, register, login, logout }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ user, isLoading, register, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 //contexte aboneliğimizi kolaylaştıracak hook
