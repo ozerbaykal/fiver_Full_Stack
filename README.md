@@ -116,15 +116,15 @@ npm run dev
 npm install
 npm run dev
 
+```
 
-
-## 📌 TypeScript-Specific Enhancements
+## 📌 **TypeScript-Specific Enhancements**
 ✔ Type-Safe API Responses - No more any type, strict typings for all responses.
 ✔ Zod for Validation - API requests are validated using Zod to prevent malformed data.
 ✔ Typed Express Middleware - Strongly typed middleware for authentication and role-based access.
 ✔ Custom Hooks with TypeScript - Fully typed React Query hooks for API communication.
 
-## 📌 Contributing
+## 📌 **Contributing**
 Want to contribute? Follow these steps:
 
 Fork the repository 🍴
@@ -132,9 +132,8 @@ Create a new branch 🌿
 Make your changes & commit 📌
 Submit a pull request 🚀
 
-## 📞 Contact
+## 📞 **Contact**
 👨‍💻 Developer: Özer BAYKAL
 📧 Email: baykalozer87@gmail.com
 🔗 LinkedIn:linkedin.com/in/özer-baykal
 📂 GitHub: (https://github.com/ozerbaykal)
-```
