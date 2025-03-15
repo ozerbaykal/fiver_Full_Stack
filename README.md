@@ -116,7 +116,7 @@ npm run dev
 npm install
 npm run dev
 
-```
+
 
 ## 📌 TypeScript-Specific Enhancements
 ✔ Type-Safe API Responses - No more any type, strict typings for all responses.
@@ -137,3 +137,4 @@ Submit a pull request 🚀
 📧 Email: baykalozer87@gmail.com
 🔗 LinkedIn:linkedin.com/in/özer-baykal
 📂 GitHub: (https://github.com/ozerbaykal)
+```
