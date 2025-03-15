@@ -7,7 +7,7 @@ const Protected = () => {
   const { user, isLoading } = useAuth();
 
   //Kullanıcı verisi yüklenene  kadar loader bas
-  if (isLoading) return <Loader />;
+  if (isLoading) return <Loader designs="my-20" />;
 
   //kullanıcı hesabı satıcı değilse anasayfaya yönlendir
   if (!user?.isSeller) return <Navigate to="/" replace />;
